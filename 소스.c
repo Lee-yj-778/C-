@@ -1,47 +1,24 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>// 원주율구하기
 int main() {
-
-	int card[52] = { 0, };
+	int n;
 	int i;
-	int tmp;
-	int result[52] = { 0, };
+	int x, y;
+	int tmp = 0;
+	
 	srand(time(0));
 
-	int rand_min = 0;
-	int rand_max = 51;
-
-	for (i = 0; i < 52; i++) {
-		tmp = (int)(((double)rand() / RAND_MAX) * (rand_max - rand_min) + rand_min);
-
-		if (card[tmp]) {
-			while (card[tmp] == 1) {
-				tmp = (int)(((double)rand() / RAND_MAX) * (rand_max - rand_min) + rand_min);
-			}
-			card[tmp]++;
-			result[i] = tmp;
+	n =rand();
+	int r = rand();
+	for (i = 0; i < n; i++) {
+		x = (int)(((double)rand() / RAND_MAX) * (2 * r));
+		y = (int)(((double)rand() / RAND_MAX) * (2 * r));
+		if ((x - r) * (x - r) + (y - r) * (y - r) <= r * r) {
+			tmp++;
 		}
-		else {
-			card[tmp]++;
-			result[i] = tmp;
-		}
-		switch (tmp / 13) {
-		case 0:
-			printf("%d번째 :Clover(%d)%s", i, tmp, (i + 1) % 13 == 0 ? "\n" : " ");
-			break;
-		case 1:
-			printf("%d번째 :Heart(%d)%s", i, tmp, (i + 1) % 13 == 0 ? "\n" : " ");
-			break;
-		case 2:
-			printf("%d번째 :Spade(%d)%s", i, tmp, (i + 1) % 13 == 0 ? "\n" : " ");
-			break;
-		case 3:
-			printf("%d번째 :Diamond(%d)%s", i, tmp, (i + 1) % 13 == 0 ? "\n" : " ");
-			break;
-		}
-
 	}
-
+		printf("%.2f", (float)tmp / n * 4);
 	return 0;
 }
